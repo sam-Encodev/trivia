@@ -1,6 +1,9 @@
 import 'package:trivia/trivia.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  runApp(const Trivia());
+  runApp(const ProviderScope(
+    child: Trivia(),
+  ));
 }
