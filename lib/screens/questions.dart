@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:trivia/constants/spacing.dart';
+import 'package:trivia/constants/questions.dart';
 import 'package:trivia/components/view_question.dart';
 import 'package:trivia/components/page_indicator.dart';
-import 'package:trivia/constants/questions.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class Questions extends StatefulWidget {
+class Questions extends ConsumerStatefulWidget {
   const Questions({super.key});
 
   @override
-  State<Questions> createState() => _Questions();
+  ConsumerState<Questions> createState() => _Questions();
 }
 
-class _Questions extends State<Questions> with TickerProviderStateMixin {
+class _Questions extends ConsumerState<Questions>
+    with TickerProviderStateMixin {
   late PageController _pageViewController;
   late TabController _tabController;
   int _currentPageIndex = 0;
@@ -61,16 +63,15 @@ class _Questions extends State<Questions> with TickerProviderStateMixin {
       body: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           SizedBox(
               height: boxMaxHeight,
               child: PageView.builder(
                 itemBuilder: (BuildContext context, int index) {
-                  final result = results[index];
-                  // print({"result": results});
-                  return ViewQuestion(data: result);
+                  return ViewQuestion(data: results[index]);
                 },
-                itemCount: inputs,
+                itemCount: results.length,
                 controller: _pageViewController,
                 onPageChanged: _handlePageViewChanged,
               )),

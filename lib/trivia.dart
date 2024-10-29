@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trivia/screens/home.dart';
+import 'package:trivia/screens/questions.dart';
 
 class Trivia extends StatelessWidget {
   const Trivia({super.key});
@@ -7,12 +7,11 @@ class Trivia extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const Home()
-    );
+        title: 'Trivia',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: const Questions());
   }
 }
