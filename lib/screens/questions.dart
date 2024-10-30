@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trivia/constants/text.dart';
 import 'package:trivia/constants/questions.dart';
 import 'package:trivia/components/view_question.dart';
 import 'package:trivia/components/page_indicator.dart';
@@ -54,11 +55,10 @@ class _Questions extends ConsumerState<Questions>
   @override
   Widget build(BuildContext context) {
     var getQuestions = ref.watch(questionNotifierProvider);
-
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Questions",
+          questions,
           textAlign: TextAlign.center,
         ),
       ),

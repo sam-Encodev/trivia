@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trivia/constants/text.dart';
 import 'package:trivia/models/question.dart';
 import 'package:trivia/constants/spacing.dart';
 import 'package:trivia/models/selected_response.dart';
@@ -21,7 +22,6 @@ class ViewQuestion extends ConsumerStatefulWidget {
 }
 
 class _QuestionState extends ConsumerState<ViewQuestion> {
-  int inputs = 4;
   int? selectedIndex;
 
   @override
@@ -61,7 +61,7 @@ class _QuestionState extends ConsumerState<ViewQuestion> {
                 TextSpan(
                     text: index,
                     style: const TextStyle(fontWeight: FontWeight.bold)),
-                const TextSpan(text: ' / '),
+                const TextSpan(text: slash),
                 TextSpan(text: totalQuestions),
               ],
             ),
@@ -131,7 +131,7 @@ class _QuestionState extends ConsumerState<ViewQuestion> {
                 selectedIndex = null;
               });
             },
-            child: const Text('Reset'),
+            child: const Text(reset),
           ),
           const SizedBox(
             width: double.infinity,
