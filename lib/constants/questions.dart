@@ -1,4 +1,45 @@
 const data = [
+     {
+        "category": "Music",
+        "id": "622a1c357cc59eab6f94ffb6",
+        "correctAnswer": "Bono",
+        "incorrectAnswers": [
+            "Chris Martin",
+            "Paul McCartney",
+            "Phil Collins"
+        ],
+        "question": "On the Single “ Do They Know It's Christmas ” Only One Person Performed On Both The Original And The 20 Year Remake Band Aid 20, Who Was It?",
+        "tags": [
+            "christmas",
+            "songs",
+            "music"
+        ],
+        "type": "Multiple Choice",
+        "difficulty": "hard",
+        "regions": [],
+        "isNiche": false
+    },
+      {
+        "category": "Arts & Literature",
+        "id": "645cb1257d263fd5097043a4",
+        "correctAnswer": "Hamlet",
+        "incorrectAnswers": [
+            "Romeo and Juliet",
+            "Macbeth",
+            "Othello"
+        ],
+        "question": "In which Shakespeare play does the title character say the famous line: \"A man may fish with the worm that hath eat of a king, and eat of the fish that hath fed of that worm\"?",
+        "tags": [
+            "theater",
+            "quotes",
+            "shakespeare",
+            "arts_and_literature"
+        ],
+        "type": "Multiple Choice",
+        "difficulty": "hard",
+        "regions": [],
+        "isNiche": false
+    },
   {
     "category": "Arts & Literature",
     "id": "622a1c397cc59eab6f950e0f",
