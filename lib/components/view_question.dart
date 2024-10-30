@@ -1,27 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:trivia/constants/spacing.dart';
 import 'package:trivia/models/question.dart';
+import 'package:trivia/constants/spacing.dart';
+import 'package:trivia/models/selected_response.dart';
+import 'package:trivia/providers/response_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ViewQuestion extends StatefulWidget {
-  const ViewQuestion({super.key, required this.data});
+class ViewQuestion extends ConsumerStatefulWidget {
+  const ViewQuestion(
+      {super.key,
+      required this.index,
+      required this.data,
+      required this.length});
 
+  final int index;
   final Map data;
+  final int length;
 
   @override
-  State<ViewQuestion> createState() => _QuestionState();
+  ConsumerState<ViewQuestion> createState() => _QuestionState();
 }
 
-class _QuestionState extends State<ViewQuestion> {
+class _QuestionState extends ConsumerState<ViewQuestion> {
   int inputs = 4;
   int? selectedIndex;
 
   @override
   Widget build(BuildContext context) {
+    var index = widget.index.toString();
+    var totalQuestions = widget.length.toString();
     var correctAnswer = widget.data["correctAnswer"];
     var incorrectAnswers = widget.data["incorrectAnswers"];
 
     final List<String> options = [correctAnswer, ...incorrectAnswers];
-    options.shuffle();
+    // options.shuffle();
 
     var info = Question(
       id: widget.data["id"],
@@ -37,49 +48,97 @@ class _QuestionState extends State<ViewQuestion> {
       options: options,
     );
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Text(
-          info.question.toString(),
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(height: standardSpacing),
-        Wrap(
-          direction: Axis.vertical,
-          spacing: standardSpacing,
-          children: info.options!.asMap().entries.map((entry) {
-            return SizedBox(
-              width: 400.0,
-              child: InputChip(
-                label: Text(
-                  entry.value,
+    return Container(
+      padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 60.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          RichText(
+            text: TextSpan(
+              style: DefaultTextStyle.of(context).style,
+              children: <TextSpan>[
+                TextSpan(
+                    text: index,
+                    style: const TextStyle(fontWeight: FontWeight.bold)),
+                const TextSpan(text: ' / '),
+                TextSpan(text: totalQuestions),
+              ],
+            ),
+          ),
+          const SizedBox(
+            width: double.infinity,
+            height: 30.0,
+          ),
+          Text(
+            info.question.toString(),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(
+            width: double.infinity,
+            height: 30.0,
+          ),
+          Wrap(
+            direction: Axis.vertical,
+            spacing: standardSpacing,
+            children: info.options!.asMap().entries.map((entry) {
+              return SizedBox(
+                width: 250.0,
+                child: InputChip(
+                  label: Text(
+                    entry.value,
+                  ),
+                  showCheckmark: false,
+                  selected: selectedIndex == entry.key,
+                  onSelected: (bool selected) {
+                    setState(() {
+                      if (selectedIndex == entry.key) {
+                        selectedIndex = null;
+                        ref
+                            .read(responseNotifierProvider.notifier)
+                            .removeResponse(SelectedResponse(
+                              userID: 1,
+                              questionID: info.id,
+                              id: int.tryParse(index),
+                            ));
+                      } else {
+                        selectedIndex = entry.key;
+                        ref.read(responseNotifierProvider.notifier).addResponse(
+                            SelectedResponse(
+                                userID: 1,
+                                questionID: info.id,
+                                options: info.options,
+                                id: int.tryParse(index),
+                                question: info.question,
+                                selectedOption: entry.value,
+                                createdAt: DateTime.timestamp().toString(),
+                                updatedAt: DateTime.timestamp().toString(),
+                                correctAnswer: info.correctAnswer));
+                      }
+                    });
+                  },
                 ),
-                showCheckmark: false,
-                selected: selectedIndex == entry.key,
-                onSelected: (bool selected) {
-                  setState(() {
-                    if (selectedIndex == entry.key) {
-                      selectedIndex = null;
-                    } else {
-                      selectedIndex = entry.key;
-                    }
-                  });
-                },
-              ),
-            );
-          }).toList(),
-        ),
-        const SizedBox(height: standardSpacing),
-        ElevatedButton(
-          onPressed: () {
-            setState(() {
-              selectedIndex = null;
-            });
-          },
-          child: const Text('Reset'),
-        )
-      ],
+              );
+            }).toList(),
+          ),
+          const SizedBox(
+            width: double.infinity,
+            height: 30.0,
+          ),
+          ElevatedButton(
+            onPressed: () {
+              setState(() {
+                selectedIndex = null;
+              });
+            },
+            child: const Text('Reset'),
+          ),
+          const SizedBox(
+            width: double.infinity,
+            height: 30.0,
+          ),
+        ],
+      ),
     );
   }
 }

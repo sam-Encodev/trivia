@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:trivia/constants/spacing.dart';
 import 'package:trivia/constants/questions.dart';
 import 'package:trivia/components/view_question.dart';
 import 'package:trivia/components/page_indicator.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:trivia/providers/questions_provider.dart';
 
 class Questions extends ConsumerStatefulWidget {
   const Questions({super.key});
@@ -19,12 +19,13 @@ class _Questions extends ConsumerState<Questions>
   int _currentPageIndex = 0;
   int inputs = 4;
   int? selectedIndex;
+  final results = Results().getQuestions();
 
   @override
   void initState() {
     super.initState();
     _pageViewController = PageController();
-    _tabController = TabController(length: inputs, vsync: this);
+    _tabController = TabController(length: results.length.toInt(), vsync: this);
   }
 
   @override
@@ -50,9 +51,10 @@ class _Questions extends ConsumerState<Questions>
     });
   }
 
-  final results = Results().getQuestions();
   @override
   Widget build(BuildContext context) {
+    var getQuestions = ref.watch(questionNotifierProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -61,28 +63,33 @@ class _Questions extends ConsumerState<Questions>
         ),
       ),
       body: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SizedBox(
-              height: boxMaxHeight,
+          Expanded(
+            flex: 3,
+            child: SizedBox.expand(
               child: PageView.builder(
                 itemBuilder: (BuildContext context, int index) {
-                  return ViewQuestion(data: results[index]);
+                  return ViewQuestion(
+                      index: index + 1,
+                      data: results[index],
+                      length: results.length.toInt());
                 },
-                itemCount: results.length,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: getQuestions.length.toInt(),
                 controller: _pageViewController,
                 onPageChanged: _handlePageViewChanged,
-              )),
-          SizedBox(
-            height: boxMinHeight,
-            child: PageIndicator(
-              tabController: _tabController,
-              currentPageIndex: _currentPageIndex,
-              onUpdateCurrentPageIndex: _updateCurrentPageIndex,
-              // size: inputs
+              ),
             ),
+          ),
+          PageIndicator(
+            tabController: _tabController,
+            currentPageIndex: _currentPageIndex,
+            onUpdateCurrentPageIndex: _updateCurrentPageIndex,
+            // size: inputs
+          ),
+          const SizedBox(
+            height: 150.0,
           ),
         ],
       ),
