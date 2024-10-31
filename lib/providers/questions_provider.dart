@@ -5,24 +5,6 @@ class QuestionNotifier extends Notifier<List<Question>> {
   @override
   List<Question> build() => [
         Question(
-            category: "Film & TV",
-            id: "622a1c347cc59eab6f94fbf8",
-            correctAnswer:
-                "\"Listen to me, mister. You're my knight in shining armor. Don't you forget it. You're going to get back on that horse, and I'm going to be right behind you, holding on tight, and away we're gonna , go, go!\"",
-            incorrectAnswers: [
-              "\"What a dump.\"",
-              "\"What’s the most you ever lost on a coin toss?\"",
-              "\"Chewie, we’re home.\""
-            ],
-            question:
-                "Which of these quotes is from the film 'On Golden Pond'?",
-            tags: ["quotes", "film", "film_and_tv"],
-            type: "Multiple Choice",
-            difficulty: "hard",
-            regions: [],
-            isNiche: false,
-            options: []),
-        Question(
             category: "Music",
             id: "622a1c357cc59eab6f94ffb6",
             correctAnswer: "Bono",
@@ -736,24 +718,7 @@ class QuestionNotifier extends Notifier<List<Question>> {
             regions: [],
             isNiche: false,
             options: []),
-        Question(
-            category: "Film & TV",
-            id: "622a1c347cc59eab6f94fc24",
-            correctAnswer: '"I see dead people."',
-            incorrectAnswers: [
-              '"I have had it with these mother—— snakes on this mother—— plane!"',
-              '"I have nipples Greg. Could you milk me?"',
-              '"You talking to me?"',
-            ],
-            question:
-                "Which of these quotes is from the film 'The Sixth Sense'?",
-            tags: ["quotes", "film", "general_knowledge", "film_and_tv"],
-            type: "Multiple Choice",
-            difficulty: "medium",
-            regions: [],
-            isNiche: false,
-            options: []),
-      ].toList();
+      ].reversed.toList();
 }
 
 final questionNotifierProvider =
