@@ -18,7 +18,6 @@ class _Questions extends ConsumerState<Questions>
   late PageController _pageViewController;
   late TabController _tabController;
   int _currentPageIndex = 0;
-  int inputs = 4;
   int? selectedIndex;
   final results = Results().getQuestions();
 
@@ -54,7 +53,8 @@ class _Questions extends ConsumerState<Questions>
 
   @override
   Widget build(BuildContext context) {
-    var getQuestions = ref.watch(questionNotifierProvider);
+    final getQuestions = ref.watch(questionNotifierProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -64,7 +64,7 @@ class _Questions extends ConsumerState<Questions>
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
+        children: [ 
           Expanded(
             flex: 3,
             child: SizedBox.expand(
@@ -72,8 +72,8 @@ class _Questions extends ConsumerState<Questions>
                 itemBuilder: (BuildContext context, int index) {
                   return ViewQuestion(
                       index: index + 1,
-                      data: results[index],
-                      length: results.length.toInt());
+                      data: getQuestions[index],
+                      length: getQuestions.length.toInt());
                 },
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: getQuestions.length.toInt(),
@@ -86,7 +86,6 @@ class _Questions extends ConsumerState<Questions>
             tabController: _tabController,
             currentPageIndex: _currentPageIndex,
             onUpdateCurrentPageIndex: _updateCurrentPageIndex,
-            // size: inputs
           ),
           const SizedBox(
             height: 150.0,
