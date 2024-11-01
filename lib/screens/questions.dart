@@ -4,6 +4,7 @@ import 'package:trivia/constants/questions.dart';
 import 'package:trivia/components/view_question.dart';
 import 'package:trivia/components/page_indicator.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:trivia/providers/response_provider.dart';
 import 'package:trivia/providers/questions_provider.dart';
 
 class Questions extends ConsumerStatefulWidget {
@@ -55,16 +56,39 @@ class _Questions extends ConsumerState<Questions>
   Widget build(BuildContext context) {
     final getQuestions = ref.watch(questionNotifierProvider);
 
+    var responder = ref.watch(responseNotifierProvider.notifier).getScores();
+    print({"responder": responder});
+
     return Scaffold(
       appBar: AppBar(
+        // leading: IconButton(
+        //   icon: const Icon(Icons.arrow_back),
+        //   // icon: const Icon(Icons.delete_forever),
+        //   tooltip: 'Home',
+        //   onPressed: () {
+        //     Navigator.popUntil(context, ModalRoute.withName('/'));
+        //   },
+        // ),
+        leadingWidth: 0,
+        leading: Container(),
         title: const Text(
           questions,
           textAlign: TextAlign.center,
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.dangerous_rounded),
+            // icon: const Icon(Icons.delete_forever),
+            tooltip: 'Quit',
+            onPressed: () {
+              Navigator.popUntil(context, ModalRoute.withName('/'));
+            },
+          ),
+        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [ 
+        children: [
           Expanded(
             flex: 3,
             child: SizedBox.expand(
