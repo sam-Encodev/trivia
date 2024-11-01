@@ -8,6 +8,22 @@ class ResponseState extends Notifier {
     return [];
   }
 
+  Map<String, int> getScores() {
+    var correct =
+        state.where((test) => test.correctAnswer == test.selectedOption);
+
+    var incorrect =
+        state.where((test) => test.correctAnswer != test.selectedOption);
+
+    var total = correct.toList().length + incorrect.toList().length;
+
+    return {
+      "coreect": correct.toList().length,
+      "incorrect": incorrect.toList().length,
+      "total": total
+    };
+  }
+
   void addResponse(SelectedResponse response) {
     ref.read(responserNotifierProvider.notifier).setResponse(true);
     state = [...state, response];

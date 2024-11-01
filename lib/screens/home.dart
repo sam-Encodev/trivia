@@ -6,6 +6,28 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Questions();
+    return Scaffold(
+      extendBody: true,
+      appBar: AppBar(
+        leadingWidth: 0,
+        leading: Container(),
+        title: null,
+      ),
+      body: Center(
+          child: Column(
+        children: [
+          const Text("Home"),
+          TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Questions()),
+              );
+            },
+            child: const Text("Route to Questions"),
+          )
+        ],
+      )),
+    );
   }
 }
