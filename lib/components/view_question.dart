@@ -130,14 +130,6 @@ class _QuestionState extends ConsumerState<ViewQuestion> {
             width: double.infinity,
             height: 30.0,
           ),
-          ElevatedButton(
-            onPressed: () {
-              setState(() {
-                selectedIndex = null;
-              });
-            },
-            child: const Text(reset),
-          ),
           const SizedBox(
             width: double.infinity,
             height: 30.0,
