@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trivia/screens/home.dart';
-import 'package:trivia/screens/review.dart';
+import 'package:trivia/screens/reviews.dart';
 import 'package:trivia/screens/questions.dart';
 
 class Trivia extends StatelessWidget {
@@ -13,15 +13,12 @@ class Trivia extends StatelessWidget {
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          backgroundColor: Colors.red,
-        ),
         useMaterial3: true,
       ),
       routes: {
         '/': (context) => const Home(),
+        '/review': (context) => const Reviews(),
         '/questions': (context) => const Questions(),
-        '/review': (context) => const Review(),
       },
     );
   }
