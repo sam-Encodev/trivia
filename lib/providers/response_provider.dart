@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ResponseState extends Notifier {
   @override
-  List<SelectedResponse> build() {
-    return [];
+  List build() {
+    return [].toList();
   }
 
   Map<String, int> getScores() {
@@ -18,10 +18,14 @@ class ResponseState extends Notifier {
     var total = correct.toList().length + incorrect.toList().length;
 
     return {
-      "coreect": correct.toList().length,
-      "incorrect": incorrect.toList().length,
+      "accurate": correct.toList().length,
+      "inaccurate": incorrect.toList().length,
       "total": total
     };
+  }
+
+  void reset() {
+    state = [];
   }
 
   void addResponse(SelectedResponse response) {
