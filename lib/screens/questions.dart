@@ -56,9 +56,6 @@ class _Questions extends ConsumerState<Questions>
   Widget build(BuildContext context) {
     final getQuestions = ref.watch(questionNotifierProvider);
 
-    var responder = ref.watch(responseNotifierProvider.notifier).getScores();
-    print({"responder": responder});
-
     return Scaffold(
       appBar: AppBar(
         // leading: IconButton(
@@ -81,6 +78,7 @@ class _Questions extends ConsumerState<Questions>
             // icon: const Icon(Icons.delete_forever),
             tooltip: 'Quit',
             onPressed: () {
+              ref.read(responseNotifierProvider.notifier).reset();
               Navigator.popUntil(context, ModalRoute.withName('/'));
             },
           ),
