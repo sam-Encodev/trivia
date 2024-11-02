@@ -14,19 +14,14 @@ class Home extends StatelessWidget {
         title: null,
       ),
       body: Center(
-          child: Column(
-        children: [
-          const Text("Home"),
-          TextButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Questions()),
-              );
-            },
-            child: const Text("Route to Questions"),
-          )
-        ],
+          child: TextButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const Questions()),
+          );
+        },
+        child: const Text("Play Trivia"),
       )),
     );
   }
