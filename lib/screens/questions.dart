@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:trivia/constants/text.dart';
-import 'package:trivia/constants/questions.dart';
 import 'package:trivia/components/view_question.dart';
 import 'package:trivia/models/selected_response.dart';
 import 'package:trivia/components/page_indicator.dart';
@@ -22,13 +21,13 @@ class _Questions extends ConsumerState<Questions>
   int _currentPageIndex = 0;
   late bool submitReady = false;
   late SelectedResponse options;
-  final results = Results().getQuestions();
 
   @override
   void initState() {
     super.initState();
     _pageViewController = PageController();
-    _tabController = TabController(length: results.length.toInt(), vsync: this);
+    _tabController = TabController(
+        length: ref.read(questionNotifierProvider).length.toInt(), vsync: this);
   }
 
   @override
