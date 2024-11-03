@@ -3,7 +3,6 @@ import 'package:trivia/constants/text.dart';
 import 'package:trivia/screens/reviews.dart';
 import 'package:trivia/constants/styles.dart';
 import 'package:trivia/constants/spacing.dart';
-import 'package:trivia/providers/responder.dart';
 import 'package:trivia/components/snack_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -13,11 +12,15 @@ class PageIndicator extends ConsumerWidget {
     required this.tabController,
     required this.currentPageIndex,
     required this.onUpdateCurrentPageIndex,
+    required this.onSubmit,
+    required this.submitReady,
   });
 
   final int currentPageIndex;
   final TabController tabController;
   final void Function(int) onUpdateCurrentPageIndex;
+  final void Function() onSubmit;
+  final bool submitReady;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -28,11 +31,8 @@ class PageIndicator extends ConsumerWidget {
       children: <Widget>[
         IconButton(
           onPressed: () {
-            var responder = ref.read(responserNotifierProvider);
-            var getState = ref.read(responserNotifierProvider);
-
-            if (currentPageIndex == length && getState == true) {
-              ref.read(responserNotifierProvider.notifier).setResponse(false);
+            if (currentPageIndex == length && submitReady == true) {
+              onSubmit();
 
               showDialog<void>(
                 context: context,
@@ -42,9 +42,7 @@ class PageIndicator extends ConsumerWidget {
                     // title: const Text('AlertDialog Title'),
                     content: const SingleChildScrollView(
                       child: ListBody(
-                        children: <Widget>[
-                          Text(congratsMessage)
-                        ],
+                        children: <Widget>[Text(congratsMessage)],
                       ),
                     ),
                     actions: <Widget>[
@@ -70,13 +68,13 @@ class PageIndicator extends ConsumerWidget {
               return;
             }
 
-            if (responder == false) {
+            if (submitReady == false) {
               snackBar(context, message: errorEntry);
               return;
             }
 
             onUpdateCurrentPageIndex(currentPageIndex + 1);
-            ref.read(responserNotifierProvider.notifier).setResponse(false);
+            onSubmit();
           },
           style: maxIconButtonStyle(context),
           icon: Icon(

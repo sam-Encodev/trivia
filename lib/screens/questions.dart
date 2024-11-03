@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:trivia/constants/text.dart';
 import 'package:trivia/constants/questions.dart';
 import 'package:trivia/components/view_question.dart';
+import 'package:trivia/models/selected_response.dart';
 import 'package:trivia/components/page_indicator.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:trivia/providers/response_provider.dart';
@@ -19,7 +20,8 @@ class _Questions extends ConsumerState<Questions>
   late PageController _pageViewController;
   late TabController _tabController;
   int _currentPageIndex = 0;
-  int? selectedIndex;
+  late bool submitReady = false;
+  late SelectedResponse options;
   final results = Results().getQuestions();
 
   @override
@@ -52,10 +54,33 @@ class _Questions extends ConsumerState<Questions>
     });
   }
 
+  void _submitSelected() {
+    ref.read(responseNotifierProvider.notifier).addResponse(options);
+
+    setState(() {
+      submitReady = false;
+    });
+  }
+
+  void _getSelected(SelectedResponse option, bool state) {
+    if (state) {
+      setState(() {
+        submitReady = state;
+        options = option;
+      });
+
+      return;
+    }
+
+    setState(() {
+      submitReady = state;
+      options = SelectedResponse();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final getQuestions = ref.watch(questionNotifierProvider);
-
     return Scaffold(
       appBar: AppBar(
         // leading: IconButton(
@@ -93,9 +118,11 @@ class _Questions extends ConsumerState<Questions>
               child: PageView.builder(
                 itemBuilder: (BuildContext context, int index) {
                   return ViewQuestion(
-                      index: index + 1,
-                      data: getQuestions[index],
-                      length: getQuestions.length.toInt());
+                    index: index + 1,
+                    data: getQuestions[index],
+                    length: getQuestions.length.toInt(),
+                    getSelected: _getSelected,
+                  );
                 },
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: getQuestions.length.toInt(),
@@ -105,10 +132,11 @@ class _Questions extends ConsumerState<Questions>
             ),
           ),
           PageIndicator(
-            tabController: _tabController,
-            currentPageIndex: _currentPageIndex,
-            onUpdateCurrentPageIndex: _updateCurrentPageIndex,
-          ),
+              tabController: _tabController,
+              currentPageIndex: _currentPageIndex,
+              onUpdateCurrentPageIndex: _updateCurrentPageIndex,
+              onSubmit: _submitSelected,
+              submitReady: submitReady),
           const SizedBox(
             height: 150.0,
           ),

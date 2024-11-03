@@ -3,19 +3,21 @@ import 'package:trivia/constants/text.dart';
 import 'package:trivia/models/question.dart';
 import 'package:trivia/constants/spacing.dart';
 import 'package:trivia/models/selected_response.dart';
-import 'package:trivia/providers/response_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ViewQuestion extends ConsumerStatefulWidget {
+  const ViewQuestion({
+    super.key,
+    required this.index,
+    required this.data,
+    required this.length,
+    required this.getSelected,
+  });
+
   final int index;
   final dynamic data;
   final int length;
-
-  const ViewQuestion(
-      {super.key,
-      required this.index,
-      required this.data,
-      required this.length});
+  final void Function(SelectedResponse, bool) getSelected;
 
   @override
   ConsumerState<ViewQuestion> createState() => _QuestionState();
@@ -26,6 +28,8 @@ class _QuestionState extends ConsumerState<ViewQuestion> {
 
   @override
   Widget build(BuildContext context) {
+    var getSelected = widget.getSelected;
+
     var index = widget.index.toString();
     var totalQuestions = widget.length.toString();
     var correctAnswer = widget.data.correctAnswer;
@@ -99,27 +103,21 @@ class _QuestionState extends ConsumerState<ViewQuestion> {
                 onSelected: (bool selected) {
                   setState(() {
                     if (selectedIndex == entry.key) {
+                      getSelected(SelectedResponse(), false);
                       selectedIndex = null;
-                      ref
-                          .read(responseNotifierProvider.notifier)
-                          .removeResponse(SelectedResponse(
-                            userID: 1,
-                            questionID: info.id,
-                            id: int.tryParse(index),
-                          ));
                     } else {
                       selectedIndex = entry.key;
-                      ref.read(responseNotifierProvider.notifier).addResponse(
-                          SelectedResponse(
-                              userID: 1,
-                              questionID: info.id,
-                              options: info.options,
-                              id: int.tryParse(index),
-                              question: info.question,
-                              selectedOption: entry.value,
-                              createdAt: DateTime.timestamp().toString(),
-                              updatedAt: DateTime.timestamp().toString(),
-                              correctAnswer: info.correctAnswer));
+                      var option = SelectedResponse(
+                          userID: 1,
+                          questionID: info.id,
+                          options: info.options,
+                          id: int.tryParse(index),
+                          question: info.question,
+                          selectedOption: entry.value,
+                          createdAt: DateTime.timestamp().toString(),
+                          updatedAt: DateTime.timestamp().toString(),
+                          correctAnswer: info.correctAnswer);
+                      getSelected(option, true);
                     }
                   });
                 },
