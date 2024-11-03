@@ -1,5 +1,8 @@
 const slash = ' / ';
+const quit = "Quit";
+const home = "Home";
 const reset = "reset";
+const retake = "Retake";
 const review = "Review";
 const result = "View Results";
 const questions = "Questions";

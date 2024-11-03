@@ -100,7 +100,7 @@ class _Questions extends ConsumerState<Questions>
           IconButton(
             icon: const Icon(Icons.dangerous_rounded),
             // icon: const Icon(Icons.delete_forever),
-            tooltip: 'Quit',
+            tooltip: quit,
             onPressed: () {
               ref.read(responseNotifierProvider.notifier).reset();
               Navigator.popUntil(context, ModalRoute.withName('/'));

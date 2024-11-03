@@ -18,7 +18,7 @@ class Reviews extends ConsumerWidget {
         leading: IconButton(
           icon: const Icon(Icons.home),
           // icon: const Icon(Icons.delete_forever),
-          tooltip: 'Home',
+          tooltip: home,
           onPressed: () {
             ref.read(responseNotifierProvider.notifier).reset();
             Navigator.popUntil(context, ModalRoute.withName('/'));
@@ -32,7 +32,7 @@ class Reviews extends ConsumerWidget {
           IconButton(
             icon: const Icon(Icons.cached),
             // icon: const Icon(Icons.delete_forever),
-            tooltip: 'Retake',
+            tooltip: retake,
             onPressed: () {
               ref.read(responseNotifierProvider.notifier).reset();
               Navigator.pushReplacement(

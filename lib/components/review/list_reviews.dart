@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trivia/components/empty_state.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:trivia/components/review/review.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:trivia/providers/response_provider.dart';
 
 class ListReviews extends ConsumerWidget {
