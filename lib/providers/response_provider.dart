@@ -29,12 +29,10 @@ class ResponseState extends Notifier {
   }
 
   void addResponse(SelectedResponse response) {
-    ref.read(responserNotifierProvider.notifier).setResponse(true);
     state = [...state, response];
   }
 
   void removeResponse(SelectedResponse response) {
-    ref.read(responserNotifierProvider.notifier).setResponse(false);
     state = state.where((p) => p.id != response.id).toList();
   }
 
