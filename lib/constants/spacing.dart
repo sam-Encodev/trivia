@@ -1,7 +1,10 @@
+import 'dart:ui';
+
+import 'package:flutter/material.dart';
+
 const standardSpacing = 10.0;
 const maxIcons = 40.0;
 const maxButtonRadius = 10.0;
-
 
 const minFont = 17.0;
 const maxFont = 50.0;
@@ -26,3 +29,7 @@ const maxButtonWidth = 100.0;
 
 const boxMaxHeight = 450.0;
 const boxMinHeight = 100.0;
+
+const maxRadius = 50.0;
+const minRadius = 35.0;
+
