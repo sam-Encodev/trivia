@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trivia/screens/questions.dart';
+import 'package:go_router/go_router.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -16,10 +16,7 @@ class Home extends StatelessWidget {
       body: Center(
           child: TextButton(
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const Questions()),
-          );
+          context.push("/questions");
         },
         child: const Text("Play Trivia"),
       )),
