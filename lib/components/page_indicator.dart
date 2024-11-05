@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:trivia/constants/text.dart';
-import 'package:trivia/screens/reviews.dart';
 import 'package:trivia/constants/styles.dart';
 import 'package:trivia/constants/spacing.dart';
 import 'package:trivia/components/snack_bar.dart';
@@ -25,11 +25,10 @@ class PageIndicator extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var length = tabController.length.toInt() - 1;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        IconButton(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+      child: FilledButton(
+          style: buttonStyle(context),
           onPressed: () {
             if (currentPageIndex == length && submitReady == true) {
               onSubmit();
@@ -39,28 +38,14 @@ class PageIndicator extends ConsumerWidget {
                 barrierDismissible: false,
                 builder: (BuildContext context) {
                   return AlertDialog.adaptive(
-                    // title: const Text('AlertDialog Title'),
-                    content: const SingleChildScrollView(
-                      child: ListBody(
-                        children: <Widget>[Text(congratsMessage)],
-                      ),
-                    ),
-                    actions: <Widget>[
-                      Center(
-                        child: TextButton(
-                          child: const Text(result),
-                          onPressed: () {
-                            Navigator.pop(context);
-
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const PopScope(
-                                      canPop: false, child: Reviews())),
-                            );
-                          },
-                        ),
-                      ),
+                    content: const Text(congratsMessage),
+                    actions: [
+                      TextButton(
+                        child: const Text(result),
+                        onPressed: () {
+                          context.push("/reviews");
+                        },
+                      )
                     ],
                   );
                 },
@@ -76,14 +61,7 @@ class PageIndicator extends ConsumerWidget {
             onUpdateCurrentPageIndex(currentPageIndex + 1);
             onSubmit();
           },
-          style: maxIconButtonStyle(context),
-          icon: Icon(
-            Icons.arrow_right,
-            size: maxIcons,
-            color: Theme.of(context).colorScheme.primaryFixed,
-          ),
-        ),
-      ],
+          child: const Text("Next", style: TextStyle(fontSize: standardFont))),
     );
   }
 }
