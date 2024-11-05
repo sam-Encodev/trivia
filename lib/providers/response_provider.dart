@@ -1,4 +1,3 @@
-import 'package:trivia/providers/responder.dart';
 import 'package:trivia/models/selected_response.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
