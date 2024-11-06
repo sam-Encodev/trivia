@@ -44,3 +44,4 @@ app.*.map.json
 /trash
 
 lib/components/animation
+lib/components/trial
