@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+// import 'package:trivia/providers/response.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-// import 'package:trivia/providers/response_provider.dart';
 
 class Stats extends ConsumerWidget {
   const Stats({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // var getResponse = ref.watch(responseNotifierProvider);
-    // var responses = getResponse.toList();
+    // var scores = ref.watch(responseProvider.notifier).getScores();
+
+    // final double total = scores['total']!.toDouble();
+    // final int accurate = scores['accurate']!;
+    // final int inaccrurate = scores['inaccurate']!;
 
     return const Column(
       mainAxisAlignment: MainAxisAlignment.start,

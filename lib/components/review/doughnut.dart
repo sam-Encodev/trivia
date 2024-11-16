@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:trivia/models/chart.dart';
+import 'package:trivia/providers/response.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:trivia/providers/response_provider.dart';
 
 class Doughnut extends ConsumerWidget {
   const Doughnut({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var responder = ref.watch(responseNotifierProvider.notifier).getScores();
+    var responder = ref.watch(responseProvider.notifier).getScores();
 
     final int accurate = responder['accurate'] ?? 0;
     final int inaccurate = responder['inaccurate'] ?? 0;
