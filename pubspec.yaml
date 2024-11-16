@@ -42,6 +42,7 @@ dependencies:
   shared_preferences: ^2.3.2
   syncfusion_flutter_charts: ^27.1.57
   crystal_navigation_bar: ^1.0.1
+  segmented_button_slide: ^2.0.0
 
 dev_dependencies:
   flutter_test:
