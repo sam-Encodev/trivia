@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:trivia/constants/text.dart';
-import 'package:trivia/constants/colors.dart';
 import 'package:trivia/constants/spacing.dart';
 import 'package:trivia/providers/app_theme.dart';
 import 'package:trivia/providers/daily_trivia.dart';
@@ -23,8 +22,11 @@ class _SettingsState extends ConsumerState<Settings> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(settings, style: Theme.of(context).textTheme.titleLarge),
-        backgroundColor: mainBG,
+        title: Text(settings,
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge
+                ?.copyWith(color: Colors.white)),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(minRadius)),
         ),
@@ -33,13 +35,20 @@ class _SettingsState extends ConsumerState<Settings> {
         padding: const EdgeInsets.all(standardSpacing),
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        decoration: const BoxDecoration(
-          color: mainBG,
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(minRadius),
+            topRight: Radius.circular(minRadius),
+          ),
+          color: Theme.of(context).colorScheme.primaryFixed,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            const SizedBox(
+              height: 20.0,
+            ),
             const Text(
               themeManager,
               textAlign: TextAlign.left,
@@ -78,8 +87,6 @@ class _SettingsState extends ConsumerState<Settings> {
                 ),
                 Switch(
                     value: switchState,
-                    activeColor: subBG,
-                    inactiveTrackColor: const Color.fromARGB(255, 236, 236, 236),
                     onChanged: (bool value) {
                       setState(() {
                         ref

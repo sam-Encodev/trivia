@@ -4,10 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 
 bool useMaterial3 = true;
-const appBarBackground = Colors.transparent;
-const scaffoldBackground = Colors.transparent;
-const FlexScheme _scheme = FlexScheme.blackWhite;
-final String? _fontFamily = GoogleFonts.notoSans().fontFamily;
+const appBarBackground = Color.fromARGB(255, 0, 0, 0);
+const scaffoldBackground = Color.fromARGB(255, 0, 0, 0);
+const FlexScheme _scheme = FlexScheme.mandyRed;
+final String? _fontFamily = GoogleFonts.sora().fontFamily;
 
 const TextTheme _textTheme = TextTheme(
   displayLarge: TextStyle(fontSize: 57),
