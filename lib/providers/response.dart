@@ -47,7 +47,7 @@ class ResponseState extends Notifier {
     state = [...state];
   }
 
-  void getRespose(SelectedResponse response) {
+  void getResponse(SelectedResponse response) {
     state = state.where((p) => p.id == response.id).toList();
   }
 }
