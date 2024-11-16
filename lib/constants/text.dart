@@ -10,3 +10,10 @@ const congratsMessage = "Congrats, Champ!";
 const completionEntry = "Trivia complete";
 const errorEntry = "Select an option to continue.";
 const trivia = "Trivia";
+
+const settings = "Settings";
+const themeManager = "Theme";
+const system = "System";
+const light = "Light";
+const dark = "Dark";
+const dailyTrivia = "Daily Trivia";
