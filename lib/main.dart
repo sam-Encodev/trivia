@@ -12,6 +12,6 @@ Future<void> main() async {
     overrides: [
       sharedPreferencesProvider.overrideWithValue(sharedPreferences),
     ],
-    child: const SafeArea(top: true, bottom: false, child: Trivia()),
+    child: const Trivia(),
   ));
 }
