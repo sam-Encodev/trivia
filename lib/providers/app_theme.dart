@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
+import 'package:trivia/utils/theme_transformer.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AppTheme extends Notifier {
   @override
   build() {
-    return ThemeMode.system;
+    return themeTransformer();
   }
 
   void setTheme(value) {
