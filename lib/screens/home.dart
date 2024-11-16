@@ -39,14 +39,12 @@ class _HomeState extends ConsumerState<Home> {
       ),
       body: Container(
           padding: const EdgeInsets.all(standardSpacing),
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(minRadius),
               topRight: Radius.circular(minRadius),
             ),
-            color: Theme.of(context).colorScheme.primaryFixed,
+            color: Theme.of(context).colorScheme.surfaceContainerHigh,
           ),
           child: settings
               ? ListView.separated(
@@ -55,7 +53,6 @@ class _HomeState extends ConsumerState<Home> {
                     return ListTile(
                       title: Text(
                         questions[index].question,
-                
                       ),
                     );
                   },
