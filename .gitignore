@@ -43,5 +43,4 @@ app.*.map.json
 /android/app/release
 /trash
 
-lib/components/animation
 lib/components/trial
