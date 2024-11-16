@@ -1,6 +1,6 @@
 import 'package:trivia/models/question.dart';
+import 'package:trivia/providers/questions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:trivia/providers/questions_provider.dart';
 
 class QuestionsRepository {
   const QuestionsRepository(this.ref);

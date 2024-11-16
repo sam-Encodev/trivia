@@ -88,8 +88,10 @@ class _QuestionState extends ConsumerState<ViewQuestion> {
             spacing: standardSpacing,
             children: info.options!.asMap().entries.map((entry) {
               return InputChip(
-                label: SizedBox(
-                  width: 300.0,
+                label: Container(
+                  alignment: Alignment.center,
+                  width: 240.0,
+                  height: 42.0,
                   child: Text(
                     textAlign: TextAlign.center,
                     entry.value,

@@ -1,7 +1,7 @@
-import 'dart:ui';
 
-import 'package:flutter/material.dart';
 
+
+const screenPadding = 5.0;
 const standardSpacing = 10.0;
 const maxIcons = 40.0;
 const maxButtonRadius = 10.0;
