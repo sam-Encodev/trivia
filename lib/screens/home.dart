@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:trivia/constants/colors.dart';
 import 'package:trivia/constants/spacing.dart';
 import 'package:trivia/providers/daily_trivia.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,8 +14,8 @@ class Home extends ConsumerStatefulWidget {
 class _HomeState extends ConsumerState<Home> {
   @override
   Widget build(BuildContext context) {
-    var questions = ref.watch(dailyTriviaQuestions);
     var settings = ref.watch(dailyTriviaSettings);
+    var questions = ref.watch(dailyTriviaQuestions);
 
     return Scaffold(
       extendBody: true,
@@ -26,12 +25,13 @@ class _HomeState extends ConsumerState<Home> {
         title: const Text("Hollow"),
         actions: [
           IconButton(
-            color: Colors.white,
+            tooltip: "Daily Trivia",
             icon: const Icon(Icons.wifi_protected_setup_sharp),
-            onPressed: () => {ref.read(dailyTriviaQuestions.notifier).shuffle()},
+            onPressed: () =>
+                {ref.read(dailyTriviaQuestions.notifier).shuffle()},
           ),
           IconButton(
-            color: Colors.white,
+            tooltip: "Settings",
             icon: const Icon(Icons.settings_suggest_outlined),
             onPressed: () => context.push("/settings"),
           ),
@@ -41,12 +41,12 @@ class _HomeState extends ConsumerState<Home> {
           padding: const EdgeInsets.all(standardSpacing),
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.only(
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(minRadius),
               topRight: Radius.circular(minRadius),
             ),
-            color: subBG,
+            color: Theme.of(context).colorScheme.primaryFixed,
           ),
           child: settings
               ? ListView.separated(
@@ -55,8 +55,7 @@ class _HomeState extends ConsumerState<Home> {
                     return ListTile(
                       title: Text(
                         questions[index].question,
-                        style: TextStyle(
-                            color: Theme.of(context).colorScheme.shadow),
+                
                       ),
                     );
                   },
