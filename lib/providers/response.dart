@@ -1,7 +1,7 @@
 import 'package:trivia/models/selected_response.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ResponseState extends Notifier {
+class Response extends Notifier {
   @override
   List build() {
     return [].toList();
@@ -35,7 +35,7 @@ class ResponseState extends Notifier {
     state = state.where((p) => p.id != response.id).toList();
   }
 
-  void editRespose(SelectedResponse response) {
+  void editResponse(SelectedResponse response) {
     var oldResponse = state.where((p) => p.id == response.id).toList();
 
     if (oldResponse.isEmpty) {
@@ -52,6 +52,21 @@ class ResponseState extends Notifier {
   }
 }
 
-final responseNotifierProvider = NotifierProvider(() {
+final responseProvider = NotifierProvider(() {
+  return Response();
+});
+
+class ResponseState extends Notifier {
+  @override
+  build() {
+    return false;
+  }
+
+  void setResponse(value) {
+    state = value;
+  }
+}
+
+final responseStateProvider = NotifierProvider(() {
   return ResponseState();
 });
