@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:trivia/constants/spacing.dart';
 import 'package:trivia/constants/styles.dart';
+import 'package:trivia/constants/colors.dart';
+import 'package:trivia/constants/spacing.dart';
 
 class ErrorScreen extends StatelessWidget {
   const ErrorScreen({super.key});
@@ -9,12 +10,20 @@ class ErrorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: mainBG,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(minRadius)),
+        ),
+        leadingWidth: 0,
+        leading: Container(),
+      ),
       body: Container(
         padding: const EdgeInsets.all(standardSpacing),
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surface,
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        decoration: const BoxDecoration(
+          color: mainBG,
         ),
         child: SizedBox(
           child: Column(
@@ -22,6 +31,7 @@ class ErrorScreen extends StatelessWidget {
             children: [
               const SizedBox(height: standardSpacing),
               FilledButton(
+
                   onPressed: () => context.go("/"),
                   style: buttonStyle(context),
                   child: const Text("Go Home",
