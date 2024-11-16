@@ -78,7 +78,8 @@ class _SettingsState extends ConsumerState<Settings> {
                 ),
                 Switch(
                     value: switchState,
-                    activeColor: Colors.red,
+                    activeColor: subBG,
+                    inactiveTrackColor: const Color.fromARGB(255, 236, 236, 236),
                     onChanged: (bool value) {
                       setState(() {
                         ref
