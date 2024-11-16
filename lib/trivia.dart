@@ -7,6 +7,7 @@ class Trivia extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       title: 'Trivia',
       routerConfig: router,
       theme: ThemeData(

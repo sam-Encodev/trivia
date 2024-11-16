@@ -1,7 +1,7 @@
 import 'package:trivia/trivia.dart';
 import 'package:flutter/material.dart';
+import 'package:trivia/providers/lean.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:trivia/providers/lean_providers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
@@ -12,6 +12,6 @@ Future<void> main() async {
     overrides: [
       sharedPreferencesProvider.overrideWithValue(sharedPreferences),
     ],
-    child: const Trivia(),
+    child: const SafeArea(top: true, bottom: false, child: Trivia()),
   ));
 }
