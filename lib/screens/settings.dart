@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:trivia/constants/text.dart';
 import 'package:trivia/constants/spacing.dart';
-import 'package:trivia/providers/app_theme.dart';
 import 'package:trivia/providers/daily_trivia.dart';
+import 'package:trivia/components/segment_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Settings extends ConsumerStatefulWidget {
@@ -13,11 +13,8 @@ class Settings extends ConsumerStatefulWidget {
 }
 
 class _SettingsState extends ConsumerState<Settings> {
-  late var theme = ThemeMode.system;
-
   @override
   Widget build(BuildContext context) {
-    var theme = ref.watch(appTheme);
     var switchState = ref.watch(dailyTriviaSettings);
 
     return Scaffold(
@@ -40,7 +37,7 @@ class _SettingsState extends ConsumerState<Settings> {
             topLeft: Radius.circular(minRadius),
             topRight: Radius.circular(minRadius),
           ),
-          color: Theme.of(context).colorScheme.primaryFixed,
+          color: Theme.of(context).colorScheme.surfaceContainerHigh,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -53,27 +50,7 @@ class _SettingsState extends ConsumerState<Settings> {
               themeManager,
               textAlign: TextAlign.left,
             ),
-            SegmentedButton(
-                segments: const [
-                  ButtonSegment(
-                      value: ThemeMode.system,
-                      label: Text(system),
-                      icon: Icon(Icons.add_to_home_screen)),
-                  ButtonSegment(
-                      value: ThemeMode.light,
-                      label: Text(light),
-                      icon: Icon(Icons.wb_sunny)),
-                  ButtonSegment(
-                      value: ThemeMode.dark,
-                      label: Text(dark),
-                      icon: Icon(Icons.brightness_2))
-                ],
-                selected: {
-                  theme
-                },
-                onSelectionChanged: (newSelection) {
-                  ref.read(appTheme.notifier).setTheme(newSelection.first);
-                }),
+            const SegmentButton(),
             const SizedBox(
               height: 20.0,
             ),
