@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:trivia/constants/spacing.dart';
 import 'package:trivia/providers/daily_trivia.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/scheduler.dart' show timeDilation;
 
 class Home extends ConsumerStatefulWidget {
   const Home({super.key});
@@ -14,14 +15,13 @@ class Home extends ConsumerStatefulWidget {
 class _HomeState extends ConsumerState<Home> {
   @override
   Widget build(BuildContext context) {
+    timeDilation = 3.5; // 1.0 m
     var settings = ref.watch(dailyTriviaSettings);
     var questions = ref.watch(dailyTriviaQuestions);
 
     return Scaffold(
-      extendBody: true,
       appBar: AppBar(
         leadingWidth: 0,
-        leading: Container(),
         title: const Text("Hollow"),
         actions: [
           IconButton(
