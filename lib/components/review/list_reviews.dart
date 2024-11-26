@@ -21,7 +21,7 @@ class ListReviews extends ConsumerWidget {
             },
             separatorBuilder: (BuildContext context, int index) => Divider(
               height: 10.0,
-              color: Theme.of(context).colorScheme.surface,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
           );
   }

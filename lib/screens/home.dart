@@ -65,7 +65,7 @@ class _HomeState extends ConsumerState<Home> {
                   separatorBuilder: (BuildContext context, int index) =>
                       Divider(
                     height: 10.0,
-                    color: Theme.of(context).colorScheme.surface,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 )
               : const Center(child: Text("Hello"))),
