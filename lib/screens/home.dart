@@ -41,7 +41,7 @@ class _HomeState extends ConsumerState<Home> {
       ),
       body: Container(
           height: MediaQuery.of(context).size.height / 1.4,
-          padding: const EdgeInsets.all(standardSpacing),
+          padding: const EdgeInsets.symmetric(vertical :standardSpacing),
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(minRadius),
@@ -58,11 +58,13 @@ class _HomeState extends ConsumerState<Home> {
                     return ListTile(
                       title: Text(
                         questions[index].question,
+                        style: const TextStyle(fontSize: 15.0),
                       ),
                     );
                   },
                   separatorBuilder: (BuildContext context, int index) =>
                       Divider(
+                    height: 10.0,
                     color: Theme.of(context).colorScheme.surface,
                   ),
                 )
