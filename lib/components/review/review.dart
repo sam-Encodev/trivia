@@ -12,7 +12,7 @@ class Review extends StatelessWidget {
     return ListTile(
       title: Text(
         review.question,
-        style: const TextStyle(fontSize: 12.0),
+        style: const TextStyle(fontSize: 15.0),
       ),
       trailing: switchIcon(context, validity),
       subtitle: Column(
