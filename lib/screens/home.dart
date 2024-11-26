@@ -41,7 +41,7 @@ class _HomeState extends ConsumerState<Home> {
       ),
       body: Container(
           height: MediaQuery.of(context).size.height / 1.4,
-          padding: const EdgeInsets.symmetric(vertical :standardSpacing),
+          padding: const EdgeInsets.symmetric(vertical: standardSpacing),
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(minRadius),

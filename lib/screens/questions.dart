@@ -82,7 +82,6 @@ class _Questions extends ConsumerState<Questions>
     final getQuestions = ref.watch(questionNotifierProvider);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.surfaceContainerHigh,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(minRadius)),
         ),
@@ -97,6 +96,8 @@ class _Questions extends ConsumerState<Questions>
           height: MediaQuery.of(context).size.height / 1.4,
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(minRadius),
+              topRight: Radius.circular(minRadius),
               bottomLeft: Radius.circular(minRadius),
               bottomRight: Radius.circular(minRadius),
             ),
