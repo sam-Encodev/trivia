@@ -36,7 +36,7 @@ class _Reviews extends ConsumerState<Reviews> {
         ),
         actions: [
           IconButton(
-            tooltip: "Chart",
+            tooltip: showList ? "Chart" : "List",
             icon: Icon(
                 showList ? Icons.switch_access_shortcut_outlined : Icons.list),
             onPressed: () => {
