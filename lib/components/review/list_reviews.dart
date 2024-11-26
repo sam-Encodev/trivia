@@ -19,9 +19,9 @@ class ListReviews extends ConsumerWidget {
             itemBuilder: (BuildContext context, int index) {
               return Review(review: responses[index]);
             },
-            separatorBuilder: (BuildContext context, int index) =>
-                const Divider(
+            separatorBuilder: (BuildContext context, int index) => Divider(
               height: 10.0,
+              color: Theme.of(context).colorScheme.surface,
             ),
           );
   }
