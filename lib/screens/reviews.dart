@@ -22,6 +22,7 @@ class _Reviews extends ConsumerState<Reviews> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: const Text("Review"),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(minRadius)),
         ),
@@ -35,8 +36,9 @@ class _Reviews extends ConsumerState<Reviews> {
         ),
         actions: [
           IconButton(
-            tooltip: "Settings",
-            icon: const Icon(Icons.settings_suggest_outlined),
+            tooltip: "Chart",
+            icon: Icon(
+                showList ? Icons.switch_access_shortcut_outlined : Icons.list),
             onPressed: () => {
               setState(() {
                 showList = !showList;
@@ -49,6 +51,7 @@ class _Reviews extends ConsumerState<Reviews> {
           canPop: false,
           child: Container(
               height: MediaQuery.of(context).size.height / 1.4,
+              padding: const EdgeInsets.symmetric(vertical: standardSpacing),
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(minRadius),
@@ -70,14 +73,16 @@ class _Reviews extends ConsumerState<Reviews> {
               height: 10.0,
             ),
             FilledButton(
-                style: buttonStyle(context),
-                onPressed: () {
-                  context.go('/');
-                },
-                child: const Text(
-                  "Home",
-                  style: TextStyle(fontSize: standardFont),
-                )),
+              style: buttonStyle(context),
+              onPressed: () => {
+                setState(() {
+                  showList = !showList;
+                })
+              },
+              child: Icon(showList
+                  ? Icons.switch_access_shortcut_outlined
+                  : Icons.list),
+            ),
           ],
         ),
       ),
