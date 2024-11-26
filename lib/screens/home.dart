@@ -24,7 +24,7 @@ class _HomeState extends ConsumerState<Home> {
     return Scaffold(
       appBar: AppBar(
         leadingWidth: 0,
-        title: const Text("Hollow"),
+        title: const Text("Trivia"),
         actions: [
           IconButton(
             tooltip: "Daily Trivia",
