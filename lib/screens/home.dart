@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:trivia/constants/spacing.dart';
+import 'package:trivia/constants/styles.dart';
 import 'package:trivia/providers/daily_trivia.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
@@ -15,7 +16,8 @@ class Home extends ConsumerStatefulWidget {
 class _HomeState extends ConsumerState<Home> {
   @override
   Widget build(BuildContext context) {
-    timeDilation = 3.5; // 1.0 m
+    // timeDilation = 3.5; // 1.0 m
+    timeDilation = 2.0;
     var settings = ref.watch(dailyTriviaSettings);
     var questions = ref.watch(dailyTriviaQuestions);
 
@@ -38,11 +40,14 @@ class _HomeState extends ConsumerState<Home> {
         ],
       ),
       body: Container(
+          height: MediaQuery.of(context).size.height / 1.4,
           padding: const EdgeInsets.all(standardSpacing),
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(minRadius),
               topRight: Radius.circular(minRadius),
+              bottomLeft: Radius.circular(minRadius),
+              bottomRight: Radius.circular(minRadius),
             ),
             color: Theme.of(context).colorScheme.surfaceContainerHigh,
           ),
@@ -62,6 +67,28 @@ class _HomeState extends ConsumerState<Home> {
                   ),
                 )
               : const Center(child: Text("Hello"))),
+      bottomNavigationBar: BottomAppBar(
+        height: 85,
+        color: Colors.transparent,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const SizedBox(
+              height: 10.0,
+            ),
+            FilledButton(
+                style: buttonStyle(context),
+                onPressed: () {
+                  context.push("/questions");
+                },
+                child: const Text(
+                  "Play",
+                  style: TextStyle(fontSize: standardFont),
+                )),
+          ],
+        ),
+      ),
     );
   }
 }
