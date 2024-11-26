@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:trivia/constants/colors.dart';
 import 'package:trivia/constants/spacing.dart';
 import 'package:trivia/providers/response.dart';
 import 'package:trivia/providers/questions.dart';
@@ -83,7 +82,7 @@ class _Questions extends ConsumerState<Questions>
     final getQuestions = ref.watch(questionNotifierProvider);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: mainBG,
+        backgroundColor: Theme.of(context).colorScheme.surfaceContainerHigh,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(minRadius)),
         ),
@@ -94,61 +93,55 @@ class _Questions extends ConsumerState<Questions>
         //   textAlign: TextAlign.center,
         // ),
       ),
-      body: Stack(
-        alignment: AlignmentDirectional.topStart,
-        children: <Widget>[
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            color: subBG,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                PageIndicator(
-                    tabController: _tabController,
-                    currentPageIndex: _currentPageIndex,
-                    onUpdateCurrentPageIndex: _updateCurrentPageIndex,
-                    onSubmit: _submitSelected,
-                    submitReady: submitReady),
-                const SizedBox(
-                  height: 50.0,
-                ),
-              ],
+      body: Container(
+          height: MediaQuery.of(context).size.height / 1.4,
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(minRadius),
+              bottomRight: Radius.circular(minRadius),
             ),
+            color: Theme.of(context).colorScheme.surfaceContainerHigh,
           ),
-          Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height / 1.4,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(minRadius),
-                  bottomRight: Radius.circular(minRadius),
-                ),
-                color: mainBG,
-              ),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: SizedBox.expand(
-                      child: PageView.builder(
-                        itemBuilder: (BuildContext context, int index) {
-                          return ViewQuestion(
-                            index: index + 1,
-                            data: getQuestions[index],
-                            length: getQuestions.length.toInt(),
-                            getSelected: _getSelected,
-                          );
-                        },
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: getQuestions.length.toInt(),
-                        controller: _pageViewController,
-                        onPageChanged: _handlePageViewChanged,
-                      ),
-                    ),
+          child: Column(
+            children: [
+              Expanded(
+                child: SizedBox.expand(
+                  child: PageView.builder(
+                    itemBuilder: (BuildContext context, int index) {
+                      return ViewQuestion(
+                        index: index + 1,
+                        data: getQuestions[index],
+                        length: getQuestions.length.toInt(),
+                        getSelected: _getSelected,
+                      );
+                    },
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: getQuestions.length.toInt(),
+                    controller: _pageViewController,
+                    onPageChanged: _handlePageViewChanged,
                   ),
-                ],
-              )),
-        ],
+                ),
+              ),
+            ],
+          )),
+      bottomNavigationBar: BottomAppBar(
+        height: 85,
+        color: Colors.transparent,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const SizedBox(
+              height: 10.0,
+            ),
+            PageIndicator(
+                tabController: _tabController,
+                currentPageIndex: _currentPageIndex,
+                onUpdateCurrentPageIndex: _updateCurrentPageIndex,
+                onSubmit: _submitSelected,
+                submitReady: submitReady),
+          ],
+        ),
       ),
     );
   }
