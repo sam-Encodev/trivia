@@ -1,8 +1,8 @@
-import 'package:trivia/trivia.dart';
 import 'package:flutter/material.dart';
 import 'package:trivia/providers/lean.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:trivia/feed_back.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,6 +12,6 @@ Future<void> main() async {
     overrides: [
       sharedPreferencesProvider.overrideWithValue(sharedPreferences),
     ],
-    child: const Trivia(),
+    child: const FeedBack(),
   ));
 }
