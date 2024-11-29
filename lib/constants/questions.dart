@@ -1,3 +1,5 @@
+import 'package:trivia/models/question_qty.dart';
+
 const data = [
      {
         "category": "Music",
@@ -730,3 +732,12 @@ class Results {
     return data;
   }
 }
+
+var questionQty = [
+  QuestionQty(number: "5"),
+  QuestionQty(number: "10"),
+  QuestionQty(number: "15"),
+  QuestionQty(number: "20"),
+  QuestionQty(number: "25"),
+  QuestionQty(number: "30")
+];

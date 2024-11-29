@@ -1,4 +1,5 @@
 import 'package:trivia/models/question.dart';
+import 'package:trivia/models/question_qty.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 class QuestionNotifier extends Notifier<List<Question>> {
@@ -724,4 +725,14 @@ class QuestionNotifier extends Notifier<List<Question>> {
 final questionNotifierProvider =
     NotifierProvider<QuestionNotifier, List<Question>>(() {
   return QuestionNotifier();
+});
+
+class QuestionQtyNotifier extends Notifier<List<QuestionQty>> {
+  @override
+  List<QuestionQty> build() => [];
+}
+
+final questionQtyNotifierProvider =
+    NotifierProvider<QuestionQtyNotifier, List<QuestionQty>>(() {
+  return QuestionQtyNotifier();
 });
