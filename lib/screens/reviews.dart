@@ -27,7 +27,7 @@ class _Reviews extends ConsumerState<Reviews> {
           borderRadius: BorderRadius.vertical(top: Radius.circular(minRadius)),
         ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new),
+          icon: const Icon(Icons.arrow_back_ios_outlined),
           tooltip: home,
           onPressed: () {
             ref.read(responseProvider.notifier).reset();
@@ -38,7 +38,7 @@ class _Reviews extends ConsumerState<Reviews> {
           IconButton(
             tooltip: showList ? "Chart" : "List",
             icon: Icon(
-                showList ? Icons.switch_access_shortcut_outlined : Icons.list),
+                showList ? Icons.switch_access_shortcut_outlined : Icons.list_alt_outlined),
             onPressed: () => {
               setState(() {
                 showList = !showList;
@@ -81,7 +81,7 @@ class _Reviews extends ConsumerState<Reviews> {
               },
               child: Icon(showList
                   ? Icons.switch_access_shortcut_outlined
-                  : Icons.list),
+                  : Icons.list_alt_outlined),
             ),
           ],
         ),
