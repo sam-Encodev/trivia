@@ -20,8 +20,7 @@ class Radial extends ConsumerWidget {
       ChartData('Accurate', accurate, Colors.greenAccent),
     ];
 
-    return Center(
-            child: SfCircularChart(series: <CircularSeries<ChartData, dynamic>>[
+    return SfCircularChart(series: <CircularSeries<ChartData, dynamic>>[
       RadialBarSeries(
           enableTooltip: true,
           useSeriesColor: true,
@@ -36,6 +35,6 @@ class Radial extends ConsumerWidget {
           xValueMapper: (ChartData data, _) => data.info,
           yValueMapper: (ChartData data, _) => data.value,
           pointColorMapper: (ChartData data, _) => data.color)
-    ]));
+    ]);
   }
 }
