@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart' show timeDilation;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:trivia/components/category_list.dart';
-import 'package:trivia/constants/questions.dart';
+
+import 'package:trivia/components/categories_filter.dart';
+import 'package:trivia/components/question_qty.dart';
 import 'package:trivia/constants/spacing.dart';
 import 'package:trivia/constants/styles.dart';
 import 'package:trivia/providers/daily_trivia.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter/scheduler.dart' show timeDilation;
 
 class Home extends ConsumerStatefulWidget {
   const Home({super.key});
@@ -50,33 +51,12 @@ class _HomeState extends ConsumerState<Home> {
                 onPressed: () {
                   showModalBottomSheet<void>(
                     context: context,
-                    builder: (context) => SizedBox(
-                      height: 150,
-                      child: Center(
-                        child: Wrap(
-                          crossAxisAlignment: WrapCrossAlignment.start,
-                          spacing: 10,
-                          children: questionQty.asMap().entries.map((entry) {
-                            return InputChip(
-                              label: SizedBox(
-                                width: 80.0,
-                                child: Text(
-                                  textAlign: TextAlign.center,
-                                  entry.value.number.toString(),
-                                  maxLines: 3,
-                                  overflow: TextOverflow.clip,
-                                  softWrap: false,
-                                ),
-                              ),
-                              showCheckmark: true,
-                              onSelected: (bool selected) {
-                                setState(() {});
-                              },
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                    ),
+                    builder: (BuildContext context) {
+                      return const SizedBox(
+                        height: 200,
+                        child: QuestionQty(),
+                      );
+                    },
                   );
                 },
                 style: headerButtonStyle(context),
@@ -88,9 +68,7 @@ class _HomeState extends ConsumerState<Home> {
                     context: context,
                     builder: (context) => const SizedBox(
                       height: 240,
-                      child: Center(
-                        child: CategoryList(),
-                      ),
+                      child: CategoryFilter(),
                     ),
                   );
                 },
@@ -98,7 +76,17 @@ class _HomeState extends ConsumerState<Home> {
                 child: const Text("Categories"),
               ),
               FilledButton(
-                onPressed: () {},
+                onPressed: () {
+                  showModalBottomSheet<void>(
+                    context: context,
+                    builder: (context) => const SizedBox(
+                      height: 240,
+                      child: Center(
+                        child: Text("Coming soon"),
+                      ),
+                    ),
+                  );
+                },
                 style: headerButtonStyle(context),
                 child: const Text("Streak"),
               ),
