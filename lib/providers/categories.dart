@@ -8,9 +8,6 @@ class CategoryNotifier extends Notifier<List<Category>> {
           name: "Arts & Literature",
         ),
         Category(
-          name: "Music",
-        ),
-        Category(
           name: "Society & Culture",
         ),
         Category(
