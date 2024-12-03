@@ -19,17 +19,15 @@ class Doughnut extends ConsumerWidget {
       ChartData('Inaccurate', inaccurate, Colors.pink),
     ];
 
-    return Scaffold(
-        body: Center(
-            child: SfCircularChart(
-                tooltipBehavior: TooltipBehavior(enable: true),
-                series: <CircularSeries<ChartData, dynamic>>[
+    return SfCircularChart(
+        tooltipBehavior: TooltipBehavior(enable: true),
+        series: <CircularSeries<ChartData, dynamic>>[
           DoughnutSeries<ChartData, dynamic>(
               dataSource: chartData,
               cornerStyle: CornerStyle.bothCurve,
               xValueMapper: (ChartData data, _) => data.info,
               yValueMapper: (ChartData data, _) => data.value,
               pointColorMapper: (ChartData data, _) => data.color)
-        ])));
+        ]);
   }
 }

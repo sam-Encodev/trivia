@@ -10,6 +10,8 @@ class Radial extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var scores = ref.watch(responseProvider.notifier).getScores();
+    TooltipBehavior? tooltipBehavior =
+        TooltipBehavior(enable: true, format: 'point.x : point.y%');
 
     final double total = scores['total']!.toDouble();
     final int accurate = scores['accurate']!;
@@ -20,21 +22,25 @@ class Radial extends ConsumerWidget {
       ChartData('Accurate', accurate, Colors.greenAccent),
     ];
 
-    return SfCircularChart(series: <CircularSeries<ChartData, dynamic>>[
-      RadialBarSeries(
-          enableTooltip: true,
-          useSeriesColor: true,
-          // trackColor: const Color(0xFFFF9CBF),
-          trackOpacity: 0.1,
-          maximumValue: total,
-          radius: '70%',
-          innerRadius: '50%',
-          gap: '10%',
-          dataSource: chartData,
-          cornerStyle: CornerStyle.bothCurve,
-          xValueMapper: (ChartData data, _) => data.info,
-          yValueMapper: (ChartData data, _) => data.value,
-          pointColorMapper: (ChartData data, _) => data.color)
-    ]);
+    return SfCircularChart(
+        title: const ChartTitle(text: 'Percentage of loan closure'),
+        tooltipBehavior: tooltipBehavior,
+        series: <CircularSeries<ChartData, dynamic>>[
+          RadialBarSeries<ChartData, String>(
+              animationDuration: 0,
+              enableTooltip: true,
+              useSeriesColor: true,
+              // trackColor: const Color(0xFFFF9CBF),
+              trackOpacity: 0.1,
+              maximumValue: total,
+              radius: '70%',
+              innerRadius: '50%',
+              gap: '10%',
+              dataSource: chartData,
+              cornerStyle: CornerStyle.bothCurve,
+              xValueMapper: (ChartData data, _) => data.info,
+              yValueMapper: (ChartData data, _) => data.value,
+              pointColorMapper: (ChartData data, _) => data.color),
+        ]);
   }
 }
