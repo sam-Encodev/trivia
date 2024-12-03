@@ -1,5 +1,4 @@
 import 'package:trivia/models/question.dart';
-import 'package:trivia/models/question_qty.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 class QuestionNotifier extends Notifier<List<Question>> {
@@ -29,57 +28,57 @@ class QuestionNotifier extends Notifier<List<Question>> {
             incorrectAnswers: ["Romeo and Juliet", "Macbeth", "Othello"],
             question:
                 "In which Shakespeare play does the title character say the famous line: \"A man may fish with the worm that hath eat of a king, and eat of the fish that hath fed of that worm\"?",
-            tags: ["theater", "quotes", "shakespeare", "arts_and_lit)erature"],
+            tags: ["theater", "quotes", "shakespeare", "arts_and_literature"],
             type: "Multiple Choice",
             difficulty: "hard",
             regions: [],
             isNiche: false,
             options: []),
-        // Question(
-        //     category: "Arts & Literature",
-        //     id: "622a1c397cc59eab6f950e0f",
-        //     correctAnswer: "Stendhal",
-        //     incorrectAnswers: [
-        //       "Octave Mirbeau",
-        //       "Alphonse Daudet",
-        //       "Guy de Maupassant",
-        //     ],
-        //     question: "Which author wrote 'The Charterhouse of Parma'?",
-        //     tags: ["arts_and_literature"],
-        //     type: "Multiple Choice",
-        //     difficulty: "hard",
-        //     regions: [],
-        //     isNiche: false,
-        //     options: []),
-        // Question(
-        //     category: "Music",
-        //     id: "622a1c357cc59eab6f94fd5b",
-        //     correctAnswer: "Axl Rose",
-        //     incorrectAnswers: ["Bob Dylan", "Leonard Cohen", "Slash"],
-        //     question: "William Bailey Is The Real Name Of Whch Singer?",
-        //     tags: ["pseudonyms", "people", "music"],
-        //     type: "Multiple Choice",
-        //     difficulty: "hard",
-        //     regions: [],
-        //     isNiche: false,
-        //     options: []),
-        // Question(
-        //     category: "Society & Culture",
-        //     id: "646339d101)d576cfac3aa3c3",
-        //     correctAnswer: "The Golden Fleece",
-        //     incorrectAnswers: [
-        //       "The Trident of Poseidon",
-        //       "The Helm of Darkness",
-        //       "The Scepter of the Gods",
-        //     ],
-        //     question:
-        //         "In Greek mythology, what did Jason steal from his Uncle Pelias?",
-        //     tags: ["society_and_culture", "ancient_greece", "mythology"],
-        //     type: "Multiple Choice",
-        //     difficulty: "hard",
-        //     regions: [],
-        //     isNiche: false,
-        //     options: []),
+        Question(
+            category: "Arts & Literature",
+            id: "622a1c397cc59eab6f950e0f",
+            correctAnswer: "Stendhal",
+            incorrectAnswers: [
+              "Octave Mirbeau",
+              "Alphonse Daudet",
+              "Guy de Maupassant",
+            ],
+            question: "Which author wrote 'The Charterhouse of Parma'?",
+            tags: ["arts_and_literature"],
+            type: "Multiple Choice",
+            difficulty: "hard",
+            regions: [],
+            isNiche: false,
+            options: []),
+        Question(
+            category: "Music",
+            id: "622a1c357cc59eab6f94fd5b",
+            correctAnswer: "Axl Rose",
+            incorrectAnswers: ["Bob Dylan", "Leonard Cohen", "Slash"],
+            question: "William Bailey Is The Real Name Of Whch Singer?",
+            tags: ["pseudonyms", "people", "music"],
+            type: "Multiple Choice",
+            difficulty: "hard",
+            regions: [],
+            isNiche: false,
+            options: []),
+        Question(
+            category: "Society & Culture",
+            id: "646339d101)d576cfac3aa3c3",
+            correctAnswer: "The Golden Fleece",
+            incorrectAnswers: [
+              "The Trident of Poseidon",
+              "The Helm of Darkness",
+              "The Scepter of the Gods",
+            ],
+            question:
+                "In Greek mythology, what did Jason steal from his Uncle Pelias?",
+            tags: ["society_and_culture", "ancient_greece", "mythology"],
+            type: "Multiple Choice",
+            difficulty: "hard",
+            regions: [],
+            isNiche: false,
+            options: []),
         // Question(
         //     category: "Science",
         //     id: "622a1c3a7cc59eab6f95103e",
@@ -720,19 +719,125 @@ class QuestionNotifier extends Notifier<List<Question>> {
         //     isNiche: false,
         //     options: []),
       ].reversed.toList();
+
+  List filterQuestions(value) {
+    if (value.isEmpty) {
+      return state;
+    }
+
+    var list = [];
+    var selection = value;
+
+    if (selection?.contains("Arts & Literature")) {
+      var arts = state.where((p) => p.category == "Arts & Literature");
+      list.add(arts);
+    }
+
+    if (selection?.contains("Music")) {
+      var music = state.where((p) => p.category == "Music");
+      list.add(music);
+    }
+
+    if (selection?.contains("Geography")) {
+      var geography = state.where((p) => p.category == "Geography");
+      list.add(geography);
+    }
+
+    if (selection?.contains("History")) {
+      var history = state.where((p) => p.category == "History");
+      list.add(history);
+    }
+
+    if (selection?.contains("Society & Culture")) {
+      var society = state.where((p) => p.category == "Society & Culture");
+      list.add(society);
+    }
+
+    if (selection?.contains("Science")) {
+      var science = state.where((p) => p.category == "Science");
+      list.add(science);
+    }
+
+    if (selection?.contains("General Knowledge")) {
+      var general = state.where((p) => p.category == "General Knowledge");
+      list.add(general);
+    }
+
+    if (selection?.contains("Film & TV")) {
+      var film = state.where((p) => p.category == "Film & TV");
+      list.add(film);
+    }
+
+    // var newList = [
+    //   {"name": "Adom"},
+    //   {"name": "Kwame"},
+    // ];
+    // var adList = [
+    //   {"name": "Adom"},
+    //   {"name": "Adom"}
+    // ];
+    // newList.addAll(adList);
+    // print(newList);
+
+    var finalList = list.expand((x) => x);
+    // print({"providerLength": finalList.length.toString()});
+    return finalList.toList();
+  }
+
+  int getLength(value) {
+    if (value.isEmpty) {
+      return state.length;
+    }
+
+    var list = [];
+    var selection = value;
+
+    if (selection?.contains("Arts & Literature")) {
+      var arts = state.where((p) => p.category == "Arts & Literature");
+      list.add(arts);
+    }
+
+    if (selection?.contains("Music")) {
+      var music = state.where((p) => p.category == "Music");
+      list.add(music);
+    }
+
+    if (selection?.contains("Geography")) {
+      var geography = state.where((p) => p.category == "Geography");
+      list.add(geography);
+    }
+
+    if (selection?.contains("History")) {
+      var history = state.where((p) => p.category == "History");
+      list.add(history);
+    }
+
+    if (selection?.contains("Society & Culture")) {
+      var society = state.where((p) => p.category == "Society & Culture");
+      list.add(society);
+    }
+
+    if (selection?.contains("Science")) {
+      var science = state.where((p) => p.category == "Science");
+      list.add(science);
+    }
+
+    if (selection?.contains("General Knowledge")) {
+      var general = state.where((p) => p.category == "General Knowledge");
+      list.add(general);
+    }
+
+    if (selection?.contains("Film & TV")) {
+      var film = state.where((p) => p.category == "Film & TV");
+      list.add(film);
+    }
+
+    var finalList = list.expand((x) => x);
+    return finalList.toList().length;
+  }
 }
 
 final questionNotifierProvider =
     NotifierProvider<QuestionNotifier, List<Question>>(() {
   return QuestionNotifier();
-});
-
-class QuestionQtyNotifier extends Notifier<List<QuestionQty>> {
-  @override
-  List<QuestionQty> build() => [];
-}
-
-final questionQtyNotifierProvider =
-    NotifierProvider<QuestionQtyNotifier, List<QuestionQty>>(() {
-  return QuestionQtyNotifier();
 });
