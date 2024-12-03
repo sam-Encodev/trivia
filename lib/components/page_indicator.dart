@@ -30,6 +30,10 @@ class PageIndicator extends ConsumerWidget {
       child: FilledButton(
           style: buttonStyle(context),
           onPressed: () {
+            // print({"pagelength": length});
+            // print({"currentPageIndex": currentPageIndex});
+            // print({"submitReady": submitReady});
+
             if (currentPageIndex == length && submitReady == true) {
               onSubmit();
 
