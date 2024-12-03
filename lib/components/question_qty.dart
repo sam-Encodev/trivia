@@ -1,31 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:trivia/providers/lean.dart';
+import 'package:trivia/constants/spacing.dart';
+import 'package:trivia/constants/questions.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-const qty = [5, 10, 15, 20, 30];
-
-class QuestionQty extends StatefulWidget {
+class QuestionQty extends ConsumerStatefulWidget {
   const QuestionQty({super.key});
 
   @override
-  State<QuestionQty> createState() => _QuestionQty();
+  ConsumerState<QuestionQty> createState() => _QuestionQty();
 }
 
-class _QuestionQty extends State<QuestionQty> {
-  int? _value;
-
+class _QuestionQty extends ConsumerState<QuestionQty> {
   @override
   Widget build(BuildContext context) {
+    final qty = ref.watch(questionQtyProvider);
+
     return Center(
       child: Wrap(
-        spacing: 5.0,
-        children: qty.asMap().entries.map((entry) {
+        spacing: screenPadding,
+        children: qtyList.asMap().entries.map((entry) {
           return FilterChip(
             showCheckmark: false,
             label: Text(entry.value.toString()),
-            selected: _value == entry.value,
+            selected: qty == entry.value,
             onSelected: (bool selected) {
-              setState(() {
-                _value = selected ? entry.value : null;
-              });
+              ref.read(questionQtyProvider.notifier).state = entry.value;
             },
           );
         }).toList(),
