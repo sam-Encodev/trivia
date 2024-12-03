@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:trivia/components/categories_filter.dart';
 import 'package:trivia/components/question_qty.dart';
+import 'package:trivia/components/review/summary.dart';
 import 'package:trivia/constants/spacing.dart';
 import 'package:trivia/constants/styles.dart';
 import 'package:trivia/providers/daily_trivia.dart';
@@ -97,7 +98,6 @@ class _HomeState extends ConsumerState<Home> {
           ),
           Container(
               height: MediaQuery.of(context).size.height / 1.50,
-              padding: const EdgeInsets.symmetric(vertical: standardSpacing),
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(minRadius),
@@ -124,7 +124,12 @@ class _HomeState extends ConsumerState<Home> {
                         color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                     )
-                  : const Center(child: Text("Hello")))
+                  : ListView.builder(
+                      itemCount: [1, 2, 3].length.toInt(),
+                      itemBuilder: (BuildContext context, int index) {
+                        return const Summary();
+                      },
+                    ))
         ],
       ),
       bottomNavigationBar: BottomAppBar(
