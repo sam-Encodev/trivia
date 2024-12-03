@@ -733,11 +733,15 @@ class Results {
   }
 }
 
-var questionQty = [
-  QuestionQty(number: "5"),
-  QuestionQty(number: "10"),
-  QuestionQty(number: "15"),
-  QuestionQty(number: "20"),
-  QuestionQty(number: "25"),
-  QuestionQty(number: "30")
+const qtyList = [5, 10, 15, 20, 30];
+
+const categoryList = [
+  "Arts & Literature",
+  "Music",
+  "Geography",
+  "History",
+  "Society & Culture",
+  "Science",
+  "General Knowledge",
+  "Film & TV",
 ];
