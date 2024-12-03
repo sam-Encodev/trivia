@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trivia/constants/spacing.dart';
+import 'package:trivia/providers/categories.dart';
 import 'package:trivia/providers/response.dart';
 import 'package:trivia/providers/questions.dart';
 import 'package:trivia/components/view_question.dart';
@@ -25,9 +26,12 @@ class _Questions extends ConsumerState<Questions>
   @override
   void initState() {
     super.initState();
+    var categories = ref.read(categoryNotifierProvider);
     _pageViewController = PageController();
     _tabController = TabController(
-        length: ref.read(questionNotifierProvider).length.toInt(), vsync: this);
+        length:
+            ref.read(questionNotifierProvider.notifier).getLength(categories),
+        vsync: this);
   }
 
   @override
@@ -79,7 +83,11 @@ class _Questions extends ConsumerState<Questions>
 
   @override
   Widget build(BuildContext context) {
-    final getQuestions = ref.watch(questionNotifierProvider);
+    final categories = ref.watch(categoryNotifierProvider);
+    final getFilter = ref
+        .watch(questionNotifierProvider.notifier)
+        .filterQuestions(categories);
+
     return Scaffold(
       appBar: AppBar(
         shape: const RoundedRectangleBorder(
@@ -111,13 +119,13 @@ class _Questions extends ConsumerState<Questions>
                     itemBuilder: (BuildContext context, int index) {
                       return ViewQuestion(
                         index: index + 1,
-                        data: getQuestions[index],
-                        length: getQuestions.length.toInt(),
+                        data: getFilter[index],
+                        length: getFilter.length.toInt(),
                         getSelected: _getSelected,
                       );
                     },
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: getQuestions.length.toInt(),
+                    itemCount: getFilter.length.toInt(),
                     controller: _pageViewController,
                     onPageChanged: _handlePageViewChanged,
                   ),
