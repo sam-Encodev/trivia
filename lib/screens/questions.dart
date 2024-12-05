@@ -101,7 +101,6 @@ class _Questions extends ConsumerState<Questions>
         // ),
       ),
       body: Container(
-          height: MediaQuery.of(context).size.height / 1.4,
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(minRadius),
@@ -111,46 +110,29 @@ class _Questions extends ConsumerState<Questions>
             ),
             color: Theme.of(context).colorScheme.surfaceContainerHigh,
           ),
-          child: Column(
-            children: [
-              Expanded(
-                child: SizedBox.expand(
-                  child: PageView.builder(
-                    itemBuilder: (BuildContext context, int index) {
-                      return ViewQuestion(
-                        index: index + 1,
-                        data: getFilter[index],
-                        length: getFilter.length.toInt(),
-                        getSelected: _getSelected,
-                      );
-                    },
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: getFilter.length.toInt(),
-                    controller: _pageViewController,
-                    onPageChanged: _handlePageViewChanged,
-                  ),
-                ),
-              ),
-            ],
+          child: PageView.builder(
+            itemBuilder: (BuildContext context, int index) {
+              return ViewQuestion(
+                index: index + 1,
+                data: getFilter[index],
+                length: getFilter.length.toInt(),
+                getSelected: _getSelected,
+              );
+            },
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: getFilter.length.toInt(),
+            controller: _pageViewController,
+            onPageChanged: _handlePageViewChanged,
           )),
       bottomNavigationBar: BottomAppBar(
-        height: 85,
+        height: bottomBarHeight,
         color: Colors.transparent,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const SizedBox(
-              height: 10.0,
-            ),
-            PageIndicator(
-                tabController: _tabController,
-                currentPageIndex: _currentPageIndex,
-                onUpdateCurrentPageIndex: _updateCurrentPageIndex,
-                onSubmit: _submitSelected,
-                submitReady: submitReady),
-          ],
-        ),
+        child: PageIndicator(
+            tabController: _tabController,
+            currentPageIndex: _currentPageIndex,
+            onUpdateCurrentPageIndex: _updateCurrentPageIndex,
+            onSubmit: _submitSelected,
+            submitReady: submitReady),
       ),
     );
   }

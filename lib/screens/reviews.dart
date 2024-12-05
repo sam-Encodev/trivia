@@ -37,8 +37,9 @@ class _Reviews extends ConsumerState<Reviews> {
         actions: [
           IconButton(
             tooltip: showList ? "Chart" : "List",
-            icon: Icon(
-                showList ? Icons.switch_access_shortcut_outlined : Icons.list_alt_outlined),
+            icon: Icon(showList
+                ? Icons.switch_access_shortcut_outlined
+                : Icons.list_alt_outlined),
             onPressed: () => {
               setState(() {
                 showList = !showList;
@@ -50,7 +51,6 @@ class _Reviews extends ConsumerState<Reviews> {
       body: PopScope(
           canPop: false,
           child: Container(
-              height: MediaQuery.of(context).size.height / 1.4,
               padding: const EdgeInsets.symmetric(vertical: standardSpacing),
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.only(
@@ -63,31 +63,22 @@ class _Reviews extends ConsumerState<Reviews> {
               ),
               child: showList ? const ListReviews() : const Radial())),
       bottomNavigationBar: BottomAppBar(
-        height: 85,
+        height: bottomBarHeight,
         color: Colors.transparent,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const SizedBox(
-              height: 10.0,
-            ),
-            FilledButton(
-              style: buttonStyle(context),
-              onPressed: () => {
-                setState(() {
-                  showList = !showList;
-                })
-              },
-              child: Icon(showList
-                  ? Icons.switch_access_shortcut_outlined
-                  : Icons.list_alt_outlined),
-            ),
-          ],
+        child: FilledButton(
+          style: buttonStyle(context),
+          onPressed: () => {
+            setState(() {
+              showList = !showList;
+            })
+          },
+          child: Icon(showList
+              ? Icons.switch_access_shortcut_outlined
+              : Icons.list_alt_outlined),
         ),
       ),
     );
   }
 }
 
-      // Radial(),
+// Radial(),
