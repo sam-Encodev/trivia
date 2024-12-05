@@ -30,7 +30,7 @@ headerButtonStyle(context) {
   return ButtonStyle(
     backgroundColor:
         WidgetStatePropertyAll(Theme.of(context).colorScheme.outline),
-    minimumSize: WidgetStateProperty.all(const Size(110, 40)),
+    minimumSize: WidgetStateProperty.all(const Size(double.minPositive, 45)),
     shape: WidgetStateProperty.all(
       RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(buttonRadius),
