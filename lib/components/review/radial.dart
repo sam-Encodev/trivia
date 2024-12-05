@@ -15,16 +15,22 @@ class Radial extends ConsumerWidget {
 
     final double total = scores['total']!.toDouble();
     final int accurate = scores['accurate']!;
-    final int inaccrurate = scores['inaccurate']!;
+    final int inaccurate = scores['inaccurate']!;
 
     final chartData = [
-      ChartData('Inccurate', inaccrurate, Colors.pink),
+      ChartData('Inaccurate', inaccurate, Colors.pink),
       ChartData('Accurate', accurate, Colors.greenAccent),
     ];
 
     return SfCircularChart(
-        title: const ChartTitle(text: 'Percentage of loan closure'),
+        title: const ChartTitle(text: 'Score'),
         tooltipBehavior: tooltipBehavior,
+        legend: Legend(
+            isVisible: true,
+            // Toogles the series visibility on tapping the legend item
+            toggleSeriesVisibility: true,
+            position: LegendPosition.bottom
+        ),
         series: <CircularSeries<ChartData, dynamic>>[
           RadialBarSeries<ChartData, String>(
               animationDuration: 0,
@@ -40,7 +46,10 @@ class Radial extends ConsumerWidget {
               cornerStyle: CornerStyle.bothCurve,
               xValueMapper: (ChartData data, _) => data.info,
               yValueMapper: (ChartData data, _) => data.value,
-              pointColorMapper: (ChartData data, _) => data.color),
+              pointColorMapper: (ChartData data, _) => data.color,
+              dataLabelSettings: const DataLabelSettings(
+                  // Renders the data label
+                  isVisible: true)),
         ]);
   }
 }
