@@ -49,7 +49,7 @@ class _Reviews extends ConsumerState<Reviews> {
         ],
       ),
       body: PopScope(
-          canPop: false,
+          canPop: true,
           child: Container(
               padding: const EdgeInsets.symmetric(vertical: standardSpacing),
               decoration: BoxDecoration(
