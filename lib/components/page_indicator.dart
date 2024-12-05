@@ -25,47 +25,44 @@ class PageIndicator extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var length = tabController.length.toInt() - 1;
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0),
-      child: FilledButton(
-          style: buttonStyle(context),
-          onPressed: () {
-            // print({"pagelength": length});
-            // print({"currentPageIndex": currentPageIndex});
-            // print({"submitReady": submitReady});
+    return FilledButton(
+        style: buttonStyle(context),
+        onPressed: () {
+          // print({"pagelength": length});
+          // print({"currentPageIndex": currentPageIndex});
+          // print({"submitReady": submitReady});
 
-            if (currentPageIndex == length && submitReady == true) {
-              onSubmit();
-
-              showDialog<void>(
-                context: context,
-                barrierDismissible: false,
-                builder: (BuildContext context) {
-                  return AlertDialog.adaptive(
-                    content: const Text(congratsMessage),
-                    actions: [
-                      TextButton(
-                        child: const Text(result),
-                        onPressed: () {
-                          context.push("/reviews");
-                        },
-                      )
-                    ],
-                  );
-                },
-              );
-              return;
-            }
-
-            if (submitReady == false) {
-              snackBar(context, message: errorEntry);
-              return;
-            }
-
-            onUpdateCurrentPageIndex(currentPageIndex + 1);
+          if (currentPageIndex == length && submitReady == true) {
             onSubmit();
-          },
-          child: const Text("Next", style: TextStyle(fontSize: standardFont))),
-    );
+
+            showDialog<void>(
+              context: context,
+              barrierDismissible: false,
+              builder: (BuildContext context) {
+                return AlertDialog.adaptive(
+                  content: const Text(congratsMessage),
+                  actions: [
+                    TextButton(
+                      child: const Text(result),
+                      onPressed: () {
+                        context.push("/reviews");
+                      },
+                    )
+                  ],
+                );
+              },
+            );
+            return;
+          }
+
+          if (submitReady == false) {
+            snackBar(context, message: errorEntry);
+            return;
+          }
+
+          onUpdateCurrentPageIndex(currentPageIndex + 1);
+          onSubmit();
+        },
+        child: const Text("Next", style: TextStyle(fontSize: standardFont)));
   }
 }
