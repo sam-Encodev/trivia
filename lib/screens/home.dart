@@ -25,6 +25,9 @@ class _HomeState extends ConsumerState<Home> {
     var settings = ref.watch(dailyTriviaSettings);
     var questions = ref.watch(dailyTriviaQuestions);
 
+    // var fullHeight = MediaQuery.of(context).size.height;
+    // var bodyHeight = fullHeight - appBarFullHeight - bottomBarHeight;
+
     return Scaffold(
       appBar: AppBar(
         leadingWidth: 0,
@@ -44,112 +47,121 @@ class _HomeState extends ConsumerState<Home> {
         ],
       ),
       body: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              FilledButton(
-                onPressed: () {
-                  showModalBottomSheet<void>(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return const SizedBox(
-                        height: 200,
-                        child: QuestionQty(),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Expanded(
+                  child: FilledButton(
+                    onPressed: () {
+                      showModalBottomSheet<void>(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return const SizedBox(
+                            height: 200,
+                            child: QuestionQty(),
+                          );
+                        },
                       );
                     },
-                  );
-                },
-                style: headerButtonStyle(context),
-                child: const Text("# Questions"),
-              ),
-              FilledButton(
-                onPressed: () {
-                  showModalBottomSheet<void>(
-                    context: context,
-                    builder: (context) => const SizedBox(
-                      height: 240,
-                      child: CategoryFilter(),
-                    ),
-                  );
-                },
-                style: headerButtonStyle(context),
-                child: const Text("Categories"),
-              ),
-              FilledButton(
-                onPressed: () {
-                  showModalBottomSheet<void>(
-                    context: context,
-                    builder: (context) => const SizedBox(
-                      height: 240,
-                      child: Center(
-                        child: Text("Coming soon"),
-                      ),
-                    ),
-                  );
-                },
-                style: headerButtonStyle(context),
-                child: const Text("Streak"),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 10.0,
-          ),
-          Container(
-              height: MediaQuery.of(context).size.height / 1.50,
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(minRadius),
-                  topRight: Radius.circular(minRadius),
-                  bottomLeft: Radius.circular(minRadius),
-                  bottomRight: Radius.circular(minRadius),
+                    style: headerButtonStyle(context),
+                    child: const Text("# Questions"),
+                  ),
                 ),
-                color: Theme.of(context).colorScheme.surfaceContainerHigh,
-              ),
-              child: settings
-                  ? ListView.separated(
-                      itemCount: questions.length.toInt(),
-                      itemBuilder: (BuildContext context, int index) {
-                        return ListTile(
-                          title: Text(
-                            questions[index].question,
-                            style: const TextStyle(fontSize: 15.0),
-                          ),
-                        );
-                      },
-                      separatorBuilder: (BuildContext context, int index) =>
-                          Divider(
-                        height: 10.0,
-                        color: Theme.of(context).colorScheme.onSurfaceVariant,
-                      ),
-                    )
-                  : ListView.builder(
-                      itemCount: [1, 2, 3].length.toInt(),
-                      itemBuilder: (BuildContext context, int index) {
-                        return const Summary();
-                      },
-                    ))
+                const SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                  child: FilledButton(
+                    onPressed: () {
+                      showModalBottomSheet<void>(
+                        context: context,
+                        builder: (context) => const SizedBox(
+                          height: 240,
+                          child: CategoryFilter(),
+                        ),
+                      );
+                    },
+                    style: headerButtonStyle(context),
+                    child: const Text("Categories"),
+                  ),
+                ),
+                // const SizedBox(
+                //   width: 10,
+                // ),
+                // Expanded(
+                //   child: FilledButton(
+                //     onPressed: () {
+                //       showModalBottomSheet<void>(
+                //         context: context,
+                //         builder: (context) => const SizedBox(
+                //           height: 240,
+                //           child: Center(
+                //             child: Text("Coming soon"),
+                //           ),
+                //         ),
+                //       );
+                //     },
+                //     style: headerButtonStyle(context),
+                //     child: const Text("Streak"),
+                //   ),
+                // ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(minRadius),
+                    topRight: Radius.circular(minRadius),
+                    bottomLeft: Radius.circular(minRadius),
+                    bottomRight: Radius.circular(minRadius),
+                  ),
+                  color: Theme.of(context).colorScheme.surfaceContainerHigh,
+                ),
+                child: settings
+                    ? ListView.separated(
+                        itemCount: questions.length.toInt(),
+                        itemBuilder: (BuildContext context, int index) {
+                          return ListTile(
+                            title: Text(
+                              questions[index].question,
+                              style: const TextStyle(fontSize: 15.0),
+                            ),
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, int index) =>
+                            Divider(
+                          height: 10.0,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
+                      )
+                    : ListView.builder(
+                        itemCount: [1, 2, 3].length.toInt(),
+                        itemBuilder: (BuildContext context, int index) {
+                          return const Summary();
+                        },
+                      )),
+          )
         ],
       ),
       bottomNavigationBar: BottomAppBar(
-        height: 75,
+        height: bottomBarHeight,
         color: Colors.transparent,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            FilledButton(
-                style: buttonStyle(context),
-                onPressed: () {
-                  context.push("/questions");
-                },
-                child: const Text(
-                  "Play",
-                  style: TextStyle(fontSize: standardFont),
-                )),
-          ],
-        ),
+        child: FilledButton(
+            style: buttonStyle(context),
+            onPressed: () {
+              context.push("/questions");
+            },
+            child: const Text(
+              "Play",
+              style: TextStyle(fontSize: standardFont),
+            )),
       ),
     );
   }
