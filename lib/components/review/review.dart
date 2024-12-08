@@ -10,9 +10,10 @@ class Review extends StatelessWidget {
     final bool validity = review.selectedOption == review.correctAnswer;
 
     return ListTile(
+      contentPadding: const EdgeInsets.symmetric(horizontal: 0.0),
       title: Text(
         review.question,
-        style: const TextStyle(fontSize: 15.0),
+        style: const TextStyle(fontSize: 14.0),
       ),
       trailing: switchIcon(context, validity),
       subtitle: Column(

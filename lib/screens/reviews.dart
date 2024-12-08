@@ -51,7 +51,6 @@ class _Reviews extends ConsumerState<Reviews> {
       body: PopScope(
           canPop: true,
           child: Container(
-              padding: const EdgeInsets.symmetric(vertical: standardSpacing),
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(minRadius),

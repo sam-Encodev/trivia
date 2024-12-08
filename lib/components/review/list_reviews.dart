@@ -14,14 +14,17 @@ class ListReviews extends ConsumerWidget {
 
     return getResponse.isEmpty
         ? const EmptyState()
-        : ListView.separated(
-            itemCount: getResponse.length.toInt(),
-            itemBuilder: (BuildContext context, int index) {
-              return Review(review: responses[index]);
-            },
-            separatorBuilder: (BuildContext context, int index) => Divider(
-              height: 10.0,
-              color: Theme.of(context).colorScheme.onSurfaceVariant,
+        : Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
+            child: ListView.separated(
+              itemCount: getResponse.length.toInt(),
+              itemBuilder: (BuildContext context, int index) {
+                return Review(review: responses[index]);
+              },
+              separatorBuilder: (BuildContext context, int index) => Divider(
+                height: 10.0,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
             ),
           );
   }
