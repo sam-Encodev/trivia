@@ -6,6 +6,12 @@ class QuestionsRepository {
   const QuestionsRepository(this.ref);
   final Ref ref;
 
+    List<Question> questions() {
+    final questionList = ref.watch(questionNotifierProvider);
+
+    return questionList.toList();
+  }
+
   List<Question> getCategory(value) {
     final category = ref.watch(questionNotifierProvider);
     final results = category.where((test) => test.category == value);

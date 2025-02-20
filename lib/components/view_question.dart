@@ -4,6 +4,7 @@ import 'package:trivia/models/question.dart';
 import 'package:trivia/constants/spacing.dart';
 import 'package:trivia/models/selected_response.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class ViewQuestion extends ConsumerStatefulWidget {
   const ViewQuestion({
@@ -74,9 +75,11 @@ class _QuestionState extends ConsumerState<ViewQuestion> {
             width: double.infinity,
             height: 30.0,
           ),
-          Text(
-            info.question.toString(),
+          AutoSizeText(
             textAlign: TextAlign.center,
+            info.question.toString(),
+            style: const TextStyle(fontSize: 16),
+            maxLines: 4,
           ),
           const SizedBox(
             width: double.infinity,
@@ -90,14 +93,13 @@ class _QuestionState extends ConsumerState<ViewQuestion> {
               return InputChip(
                 label: Container(
                   alignment: Alignment.center,
-                  width: 240.0,
-                  height: 42.0,
+                  width: 270.0,
                   child: Text(
                     textAlign: TextAlign.center,
                     entry.value,
-                    maxLines: 3,
-                    overflow: TextOverflow.clip,
-                    softWrap: false,
+                    maxLines: 4,
+                    overflow: TextOverflow.ellipsis,
+                    softWrap: true,
                   ),
                 ),
                 showCheckmark: false,
