@@ -45,3 +45,4 @@ app.*.map.json
 
 lib/components/trial
 .env
+android/app/.cxx
